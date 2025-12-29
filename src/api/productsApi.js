@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/products";
+const API_URL = "http://192.168.0.135:3001/api/products";
 
 export async function getProducts() {
   return fetch(API_URL).then(r => r.json());

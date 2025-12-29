@@ -1,0 +1,6 @@
+{
+  "appId": "com.vovkmark.smartfridge",
+  "appName": "Smart Fridge",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

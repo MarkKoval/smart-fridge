@@ -11,8 +11,6 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import { useTheme } from "@mui/material/styles";
 import NavDrawer from "./NavDrawer";
@@ -20,7 +18,7 @@ import { getExpiryStatus } from "../../utils/date";
 
 const DRAWER_WIDTH = 280;
 
-export default function AppLayout({ children, products, mode, onToggleMode }) {
+export default function AppLayout({ children, products }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -42,7 +40,7 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
       <CssBaseline />
 
       <AppBar position="fixed" color="default" elevation={0}>
-        <Toolbar>
+        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
           {isMobile && (
             <IconButton
               color="inherit"
@@ -57,9 +55,15 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
 
           <Typography
             variant="h6"
-            sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              fontWeight: 700,
+            }}
           >
-            <span style={{ fontSize: 18 }}>🌿</span> Smart Fridge
+            <span style={{ fontSize: 18 }}>🌿</span> Розумний холодильник
           </Typography>
 
           <Badge
@@ -71,13 +75,6 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
             <ReportProblemIcon />
           </Badge>
 
-          <IconButton
-            color="inherit"
-            onClick={onToggleMode}
-            aria-label="toggle theme"
-          >
-            {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -94,7 +91,11 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
             onClose={handleDrawerToggle}
             ModalProps={{ keepMounted: true }}
             sx={{
-              "& .MuiDrawer-paper": { width: DRAWER_WIDTH },
+              "& .MuiDrawer-paper": {
+                width: DRAWER_WIDTH,
+                backgroundColor: "rgba(255,255,255,0.92)",
+                backdropFilter: "blur(20px)",
+              },
             }}
           >
             {drawer}
@@ -107,6 +108,8 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
               "& .MuiDrawer-paper": {
                 width: DRAWER_WIDTH,
                 boxSizing: "border-box",
+                backgroundColor: "rgba(255,255,255,0.92)",
+                backdropFilter: "blur(20px)",
               },
             }}
           >

@@ -9,7 +9,6 @@ import AppLayout from "./components/layout/AppLayout";
 import ProductsPage from "./pages/ProductsPage";
 import UsedPage from "./pages/UsedPage";
 
-import { useLocalStorageState } from "./hooks/useLocalStorageState";
 import { useSnackbar } from "./hooks/useSnackbar";
 
 import { CATEGORIES, buildMockProducts } from "./data/mockProducts";
@@ -23,20 +22,14 @@ import {
   toggleUsed,
 } from "./api/productsApi";
 
-const STORAGE_KEY_THEME = "smart-fridge-theme";
-
 export default function App() {
-  // theme
-  const [mode, setMode] = useLocalStorageState(STORAGE_KEY_THEME, "light");
-  const theme = useMemo(() => buildTheme(mode), [mode]);
+  const theme = useMemo(() => buildTheme("light"), []);
 
   // products (тепер не reducer)
   const [products, setProducts] = useState([]);
 
   // snackbar
   const { snack, notify, close } = useSnackbar();
-
-  const onToggleMode = () => setMode((m) => (m === "dark" ? "light" : "dark"));
 
   // ✅ LOAD DATA
   const load = useCallback(async () => {
@@ -105,7 +98,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="uk">
         <HashRouter>
-          <AppLayout products={products} mode={mode} onToggleMode={onToggleMode}>
+          <AppLayout products={products}>
             <Routes>
               <Route
                 path="/"

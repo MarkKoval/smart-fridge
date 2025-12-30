@@ -35,6 +35,7 @@ export default function ProductCards({
     <Stack spacing={2}>
       {items.map((p) => {
         const dLeft = daysUntil(p.expiryDate);
+        const unitLabel = p.unit ? ` ${p.unit}` : "";
         return (
           <Card key={p.id} variant="outlined">
             <CardContent>
@@ -47,7 +48,7 @@ export default function ProductCards({
 
               <Stack direction="row" spacing={1} sx={{ mt: 1, flexWrap: "wrap" }}>
                 <Chip size="small" label={p.category} />
-                <Chip size="small" label={`К-сть: ${p.quantity}`} />
+                <Chip size="small" label={`К-сть: ${p.quantity}${unitLabel}`} />
               </Stack>
 
               <Typography variant="body2" sx={{ mt: 1 }}>

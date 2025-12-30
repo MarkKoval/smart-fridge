@@ -17,8 +17,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import UndoIcon from "@mui/icons-material/Undo";
 import ProductStatusChip from "./ProductStatusChip";
 import { formatDate, daysUntil } from "../../utils/date";
-import { alpha, useTheme } from "@mui/material/styles";
-import { getExpiryStatus } from "../../utils/date";
 
 function daysLabel(d) {
   if (d === null) return "";
@@ -53,6 +51,7 @@ export default function ProductTable({
         <TableBody>
           {items.map((p) => {
             const dLeft = daysUntil(p.expiryDate);
+            const unitLabel = p.unit ? ` ${p.unit}` : "";
             return (
               <TableRow key={p.id} hover>
                 <TableCell>
@@ -61,7 +60,7 @@ export default function ProductTable({
                   </Typography>
                 </TableCell>
                 <TableCell>{p.category}</TableCell>
-                <TableCell align="right">{p.quantity}</TableCell>
+                <TableCell align="right">{`${p.quantity}${unitLabel}`}</TableCell>
                 <TableCell>{formatDate(p.dateAdded)}</TableCell>
                 <TableCell>
                   {formatDate(p.expiryDate)}{" "}

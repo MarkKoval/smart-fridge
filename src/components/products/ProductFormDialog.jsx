@@ -128,7 +128,9 @@ export default function ProductFormDialog({
       maxWidth="sm"
       PaperProps={{
         sx: {
-          backgroundColor: "#f2f2f7",
+          backgroundColor: "background.paper",
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: isMobile ? "24px 24px 0 0" : 4,
           boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
           margin: 0,
@@ -142,14 +144,25 @@ export default function ProductFormDialog({
       }}
       BackdropProps={{
         sx: {
-          backgroundColor: "rgba(0,0,0,0.35)",
+          backgroundColor:
+            theme.palette.mode === "dark"
+              ? "rgba(0,0,0,0.65)"
+              : "rgba(0,0,0,0.35)",
           backdropFilter: "blur(8px)",
         },
       }}
     >
       <Stack spacing={2} sx={{ px: { xs: 2.5, sm: 3 }, pt: 2, pb: 3 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <IconButton onClick={onClose} sx={{ backgroundColor: "#ffffff", boxShadow: 1 }}>
+          <IconButton
+            onClick={onClose}
+            sx={{
+              backgroundColor: alpha(theme.palette.background.paper, 0.9),
+              border: "1px solid",
+              borderColor: "divider",
+              boxShadow: 1,
+            }}
+          >
             <CloseIcon />
           </IconButton>
           <Typography variant="subtitle1" fontWeight={700}>
@@ -167,8 +180,10 @@ export default function ProductFormDialog({
               sx={{
                 p: 2,
                 borderRadius: 3,
-                backgroundColor: "#fff",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+                backgroundColor: "background.default",
+                border: "1px solid",
+                borderColor: "divider",
+                boxShadow: 1,
               }}
             >
               <Stack spacing={1.5}>
@@ -187,7 +202,7 @@ export default function ProductFormDialog({
                     InputProps={{
                       sx: {
                         borderRadius: 2,
-                        backgroundColor: "#f9f9fb",
+                        backgroundColor: "background.paper",
                       },
                     }}
                   />
@@ -206,7 +221,7 @@ export default function ProductFormDialog({
                       size="small"
                       sx={{
                         borderRadius: 2,
-                        backgroundColor: "#f9f9fb",
+                        backgroundColor: "background.paper",
                       }}
                     >
                       <MenuItem value="">
@@ -253,7 +268,7 @@ export default function ProductFormDialog({
                       InputProps={{
                         sx: {
                           borderRadius: 2,
-                          backgroundColor: "#f9f9fb",
+                          backgroundColor: "background.paper",
                         },
                       }}
                     />
@@ -281,7 +296,7 @@ export default function ProductFormDialog({
                         InputProps: {
                           sx: {
                             borderRadius: 2,
-                            backgroundColor: "#f9f9fb",
+                            backgroundColor: "background.paper",
                           },
                         },
                       },
@@ -318,7 +333,9 @@ export default function ProductFormDialog({
         PaperProps={{
           sx: {
             borderRadius: 3,
-            backgroundColor: alpha("#ffffff", 0.92),
+            backgroundColor: alpha(theme.palette.background.paper, 0.92),
+            border: "1px solid",
+            borderColor: "divider",
             backdropFilter: "blur(18px)",
             boxShadow: "0 16px 30px rgba(0,0,0,0.15)",
             minWidth: 220,

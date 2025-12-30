@@ -42,7 +42,7 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
       <CssBaseline />
 
       <AppBar position="fixed" color="default" elevation={0}>
-        <Toolbar>
+        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
           {isMobile && (
             <IconButton
               color="inherit"
@@ -57,9 +57,15 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
 
           <Typography
             variant="h6"
-            sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              fontWeight: 700,
+            }}
           >
-            <span style={{ fontSize: 18 }}>🌿</span> Smart Fridge
+            <span style={{ fontSize: 18 }}>🌿</span> Розумний холодильник
           </Typography>
 
           <Badge
@@ -74,7 +80,7 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
           <IconButton
             color="inherit"
             onClick={onToggleMode}
-            aria-label="toggle theme"
+            aria-label="перемкнути тему"
           >
             {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
@@ -94,7 +100,14 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
             onClose={handleDrawerToggle}
             ModalProps={{ keepMounted: true }}
             sx={{
-              "& .MuiDrawer-paper": { width: DRAWER_WIDTH },
+              "& .MuiDrawer-paper": {
+                width: DRAWER_WIDTH,
+                backgroundColor: "rgba(28,28,30,0.92)",
+                backdropFilter: "blur(20px)",
+                ...(theme.palette.mode === "light" && {
+                  backgroundColor: "rgba(255,255,255,0.92)",
+                }),
+              },
             }}
           >
             {drawer}
@@ -107,6 +120,11 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
               "& .MuiDrawer-paper": {
                 width: DRAWER_WIDTH,
                 boxSizing: "border-box",
+                backgroundColor: "rgba(28,28,30,0.92)",
+                backdropFilter: "blur(20px)",
+                ...(theme.palette.mode === "light" && {
+                  backgroundColor: "rgba(255,255,255,0.92)",
+                }),
               },
             }}
           >
@@ -120,12 +138,14 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
         component="main"
         sx={{
           flexGrow: 1,
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
-          px: { xs: 2, sm: 3 },
+          width: "100%",
+          px: { xs: 2.5, sm: 3.5, md: 4 },
           pb: { xs: 3, sm: 4 },
           pt: { xs: 10, sm: 11 },
           maxWidth: 1180,
-          mx: "auto",
+          mx: { xs: 0, md: 0 },
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {children}

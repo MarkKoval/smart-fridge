@@ -15,19 +15,19 @@ const linkStyle = ({ isActive }) => ({
   textDecoration: "none",
   color: "inherit",
   display: "block",
-  borderRadius: 12,
-  margin: "4px 8px",
-  background: isActive ? "rgba(25, 118, 210, 0.12)" : "transparent",
+  borderRadius: 16,
+  margin: "6px 10px",
+  background: isActive ? "rgba(52, 199, 89, 0.14)" : "transparent",
 });
 
 export default function NavDrawer({ onNavigate }) {
   return (
     <div>
-      <Toolbar />
+      <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }} />
       <Divider />
       <List sx={{ py: 1 }}>
         <NavLink to="/" style={linkStyle} onClick={onNavigate}>
-          <ListItemButton sx={{ borderRadius: 2 }}>
+          <ListItemButton sx={{ borderRadius: 3, py: 1.5 }}>
             <ListItemIcon>
               <KitchenIcon />
             </ListItemIcon>
@@ -36,7 +36,7 @@ export default function NavDrawer({ onNavigate }) {
         </NavLink>
 
         <NavLink to="/used" style={linkStyle} onClick={onNavigate}>
-          <ListItemButton sx={{ borderRadius: 2 }}>
+          <ListItemButton sx={{ borderRadius: 3, py: 1.5 }}>
             <ListItemIcon>
               <CheckCircleIcon />
             </ListItemIcon>

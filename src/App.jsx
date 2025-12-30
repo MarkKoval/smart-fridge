@@ -14,6 +14,8 @@ import { useSnackbar } from "./hooks/useSnackbar";
 
 import { CATEGORIES, buildMockProducts } from "./data/mockProducts";
 
+const STORAGE_KEY_THEME = "smart-fridge-theme";
+
 // ✅ API
 import {
   getProducts,
@@ -23,10 +25,7 @@ import {
   toggleUsed,
 } from "./api/productsApi";
 
-const STORAGE_KEY_THEME = "smart-fridge-theme";
-
 export default function App() {
-  // theme
   const [mode, setMode] = useLocalStorageState(STORAGE_KEY_THEME, "light");
   const theme = useMemo(() => buildTheme(mode), [mode]);
 
@@ -35,8 +34,6 @@ export default function App() {
 
   // snackbar
   const { snack, notify, close } = useSnackbar();
-
-  const onToggleMode = () => setMode((m) => (m === "dark" ? "light" : "dark"));
 
   // ✅ LOAD DATA
   const load = useCallback(async () => {
@@ -143,3 +140,4 @@ export default function App() {
     </ThemeProvider>
   );
 }
+  const onToggleMode = () => setMode((m) => (m === "dark" ? "light" : "dark"));

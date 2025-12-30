@@ -23,7 +23,11 @@ import {
 } from "./api/productsApi";
 
 export default function App() {
-  const theme = useMemo(() => buildTheme("light"), []);
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = useMemo(() => buildTheme(themeMode), [themeMode]);
+  const toggleTheme = useCallback(() => {
+    setThemeMode((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
 
   // products (тепер не reducer)
   const [products, setProducts] = useState([]);
@@ -98,7 +102,11 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="uk">
         <HashRouter>
-          <AppLayout products={products}>
+          <AppLayout
+            products={products}
+            themeMode={themeMode}
+            onToggleTheme={toggleTheme}
+          >
             <Routes>
               <Route
                 path="/"

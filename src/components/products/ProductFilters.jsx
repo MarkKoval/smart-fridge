@@ -36,8 +36,10 @@ export default function ProductFilters({
         sx={{
           p: 2,
           borderRadius: 4,
-          backgroundColor: "#fff",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+          backgroundColor: "background.paper",
+          border: "1px solid",
+          borderColor: "divider",
+          boxShadow: 1,
           flex: 1,
         }}
       >

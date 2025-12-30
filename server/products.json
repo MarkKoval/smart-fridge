@@ -1,5 +1,27 @@
 [
   {
+    "id": "d6475a4c-d429-4c6f-93e6-55b219d980f6",
+    "name": "БОРОШНО",
+    "category": "Інше",
+    "quantity": 1000,
+    "unit": "g",
+    "expiryDate": "2026-01-02T20:09:09.578Z",
+    "dateAdded": "2025-12-30T20:09:25.527Z",
+    "isUsed": false,
+    "usedAt": null
+  },
+  {
+    "id": "60d6b128-8af7-454e-a204-efbb3fa2bee8",
+    "name": "jhgf",
+    "category": "М’ясо",
+    "quantity": 5,
+    "unit": "Unit",
+    "expiryDate": "2026-01-02T20:08:54.963Z",
+    "dateAdded": "2025-12-30T20:09:02.952Z",
+    "isUsed": false,
+    "usedAt": null
+  },
+  {
     "id": "1767038939642-0f67ad61b7bfe",
     "name": "Сир",
     "category": "Молочні",

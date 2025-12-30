@@ -11,8 +11,6 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import { useTheme } from "@mui/material/styles";
 import NavDrawer from "./NavDrawer";
@@ -20,7 +18,7 @@ import { getExpiryStatus } from "../../utils/date";
 
 const DRAWER_WIDTH = 280;
 
-export default function AppLayout({ children, products, mode, onToggleMode }) {
+export default function AppLayout({ children, products }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -77,13 +75,6 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
             <ReportProblemIcon />
           </Badge>
 
-          <IconButton
-            color="inherit"
-            onClick={onToggleMode}
-            aria-label="перемкнути тему"
-          >
-            {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -102,11 +93,8 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
             sx={{
               "& .MuiDrawer-paper": {
                 width: DRAWER_WIDTH,
-                backgroundColor: "rgba(28,28,30,0.92)",
+                backgroundColor: "rgba(255,255,255,0.92)",
                 backdropFilter: "blur(20px)",
-                ...(theme.palette.mode === "light" && {
-                  backgroundColor: "rgba(255,255,255,0.92)",
-                }),
               },
             }}
           >
@@ -120,11 +108,8 @@ export default function AppLayout({ children, products, mode, onToggleMode }) {
               "& .MuiDrawer-paper": {
                 width: DRAWER_WIDTH,
                 boxSizing: "border-box",
-                backgroundColor: "rgba(28,28,30,0.92)",
+                backgroundColor: "rgba(255,255,255,0.92)",
                 backdropFilter: "blur(20px)",
-                ...(theme.palette.mode === "light" && {
-                  backgroundColor: "rgba(255,255,255,0.92)",
-                }),
               },
             }}
           >

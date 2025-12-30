@@ -90,9 +90,6 @@ export default function ProductFormDialog({
     [unit],
   );
   const isUnitMenuOpen = Boolean(unitAnchor);
-  const sheetBackground = theme.palette.mode === "dark" ? "#1C1C1E" : "#f2f2f7";
-  const cardBackground = theme.palette.mode === "dark" ? "#2C2C2E" : "#ffffff";
-  const fieldBackground = theme.palette.mode === "dark" ? "#3A3A3C" : "#f9f9fb";
 
   const handleSave = () => {
     const payload = {
@@ -131,7 +128,7 @@ export default function ProductFormDialog({
       maxWidth="sm"
       PaperProps={{
         sx: {
-          backgroundColor: sheetBackground,
+          backgroundColor: "#f2f2f7",
           borderRadius: isMobile ? "24px 24px 0 0" : 4,
           boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
           margin: 0,
@@ -170,7 +167,7 @@ export default function ProductFormDialog({
               sx={{
                 p: 2,
                 borderRadius: 3,
-                backgroundColor: cardBackground,
+                backgroundColor: "#fff",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
               }}
             >
@@ -190,7 +187,7 @@ export default function ProductFormDialog({
                     InputProps={{
                       sx: {
                         borderRadius: 2,
-                        backgroundColor: fieldBackground,
+                        backgroundColor: "#f9f9fb",
                       },
                     }}
                   />
@@ -209,7 +206,7 @@ export default function ProductFormDialog({
                       size="small"
                       sx={{
                         borderRadius: 2,
-                        backgroundColor: fieldBackground,
+                        backgroundColor: "#f9f9fb",
                       }}
                     >
                       <MenuItem value="">
@@ -256,7 +253,7 @@ export default function ProductFormDialog({
                       InputProps={{
                         sx: {
                           borderRadius: 2,
-                          backgroundColor: fieldBackground,
+                          backgroundColor: "#f9f9fb",
                         },
                       }}
                     />
@@ -284,7 +281,7 @@ export default function ProductFormDialog({
                         InputProps: {
                           sx: {
                             borderRadius: 2,
-                            backgroundColor: fieldBackground,
+                            backgroundColor: "#f9f9fb",
                           },
                         },
                       },
@@ -321,10 +318,7 @@ export default function ProductFormDialog({
         PaperProps={{
           sx: {
             borderRadius: 3,
-            backgroundColor:
-              theme.palette.mode === "dark"
-                ? alpha("#2C2C2E", 0.92)
-                : alpha("#ffffff", 0.92),
+            backgroundColor: alpha("#ffffff", 0.92),
             backdropFilter: "blur(18px)",
             boxShadow: "0 16px 30px rgba(0,0,0,0.15)",
             minWidth: 220,

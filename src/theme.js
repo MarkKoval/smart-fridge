@@ -1,6 +1,6 @@
 import { alpha, createTheme } from "@mui/material/styles";
 
-const IOS_LIGHT = {
+const IOS = {
   primary: { main: "#34C759", light: "#4CD964", dark: "#248A3D" },
   secondary: { main: "#0A84FF", light: "#5AC8FA", dark: "#0060DF" },
   success: { main: "#34C759" },
@@ -11,23 +11,12 @@ const IOS_LIGHT = {
   text: { primary: "#1C1C1E", secondary: "#636366", disabled: "#8E8E93" },
 };
 
-const IOS_DARK = {
-  primary: { main: "#30D158", light: "#5AFB7C", dark: "#248A3D" },
-  secondary: { main: "#0A84FF", light: "#5AC8FA", dark: "#0060DF" },
-  success: { main: "#30D158" },
-  warning: { main: "#FFD60A" },
-  error: { main: "#FF453A" },
-  background: { default: "#000000", paper: "#1C1C1E" },
-  divider: alpha("#FFFFFF", 0.12),
-  text: { primary: "#FFFFFF", secondary: "#A1A1A6", disabled: alpha("#FFFFFF", 0.5) },
-};
-
 export function buildTheme(mode) {
-  const p = mode === "dark" ? IOS_DARK : IOS_LIGHT;
+  const p = IOS;
 
   return createTheme({
     palette: {
-      mode,
+      mode: "light",
       primary: p.primary,
       secondary: p.secondary,
       success: p.success,

@@ -9,7 +9,6 @@ import AppLayout from "./components/layout/AppLayout";
 import ProductsPage from "./pages/ProductsPage";
 import UsedPage from "./pages/UsedPage";
 
-import { useLocalStorageState } from "./hooks/useLocalStorageState";
 import { useSnackbar } from "./hooks/useSnackbar";
 
 import { CATEGORIES, buildMockProducts } from "./data/mockProducts";
@@ -26,8 +25,7 @@ import {
 } from "./api/productsApi";
 
 export default function App() {
-  const [mode, setMode] = useLocalStorageState(STORAGE_KEY_THEME, "light");
-  const theme = useMemo(() => buildTheme(mode), [mode]);
+  const theme = useMemo(() => buildTheme("light"), []);
 
   // products (тепер не reducer)
   const [products, setProducts] = useState([]);
@@ -102,7 +100,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="uk">
         <HashRouter>
-          <AppLayout products={products} mode={mode} onToggleMode={onToggleMode}>
+          <AppLayout products={products}>
             <Routes>
               <Route
                 path="/"

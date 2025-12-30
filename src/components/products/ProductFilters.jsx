@@ -38,11 +38,8 @@ export default function ProductFilters({
         sx={{
           p: 2,
           borderRadius: 4,
-          backgroundColor: theme.palette.background.paper,
-          boxShadow:
-            theme.palette.mode === "dark"
-              ? "0 1px 3px rgba(0,0,0,0.4)"
-              : "0 1px 3px rgba(0,0,0,0.08)",
+          backgroundColor: "#fff",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
           flex: 1,
         }}
       >

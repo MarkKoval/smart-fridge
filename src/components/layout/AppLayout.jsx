@@ -46,7 +46,15 @@ export default function AppLayout({
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
-      <AppBar position="fixed" color="default" elevation={0}>
+      <AppBar
+        position="fixed"
+        color="default"
+        elevation={0}
+        sx={{
+          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
+          ml: { md: `${DRAWER_WIDTH}px` },
+        }}
+      >
         <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
           {isMobile && (
             <IconButton

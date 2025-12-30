@@ -38,7 +38,7 @@ export function buildTheme(mode) {
       text: p.text,
     },
 
-    shape: { borderRadius: 16 },
+    shape: { borderRadius: 6 },
 
     typography: {
       fontFamily:
@@ -133,10 +133,21 @@ export function buildTheme(mode) {
 
       MuiChip: {
         styleOverrides: {
-          root: {
-            borderRadius: 999,
-            fontWeight: 700,
-            backgroundColor: alpha("#34C759", 0.12),
+          root: ({ theme, ownerState }) => {
+            const colorKey = ownerState.color ?? "default";
+            const paletteColor = theme.palette[colorKey];
+            const isDefault = colorKey === "default" || !paletteColor;
+
+            return {
+              borderRadius: 999,
+              fontWeight: 700,
+              backgroundColor: isDefault
+                ? alpha(theme.palette.text.primary, 0.08)
+                : alpha(paletteColor.main, 0.16),
+              color: isDefault
+                ? theme.palette.text.secondary
+                : paletteColor.main,
+            };
           },
         },
       },

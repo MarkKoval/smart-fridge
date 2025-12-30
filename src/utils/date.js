@@ -24,7 +24,7 @@ export function getExpiryStatus(expiryISO) {
   if (d === null) return { key: "fresh", daysLeft: null };
 
   if (d < 0) return { key: "expired", daysLeft: d };
-  if (d < 2) return { key: "warning", daysLeft: d };
+  if (d < 4) return { key: "warning", daysLeft: d };
   return { key: "fresh", daysLeft: d };
 }
 

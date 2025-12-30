@@ -23,12 +23,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import { makeId } from "../../utils/id";
 
 const unitOptions = [
-  { value: "Pck", label: "Пакунок (Pck)" },
-  { value: "Unit", label: "Одиниця (Unit)" },
-  { value: "kg", label: "Кілограми (kg)" },
-  { value: "g", label: "Грами (g)" },
-  { value: "L", label: "Літри (L)" },
-  { value: "mL", label: "Мілілітри (mL)" },
+  { value: "Упак.", label: "Упак." },
+  { value: "Одиниця", label: "Одиниця" },
+  { value: "Кг", label: "Кілограми" },
+  { value: "г", label: "Грами" },
+  { value: "Л", label: "Літри" },
+  { value: "Мл", label: "Мілілітри" },
 ];
 
 function validate({ name, category, quantity, expiryDate, unit }) {
@@ -59,7 +59,7 @@ export default function ProductFormDialog({
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [unit, setUnit] = useState("Pck");
+  const [unit, setUnit] = useState("Упак.");
   const [expiryDate, setExpiryDate] = useState(dayjs().add(3, "day"));
   const [errors, setErrors] = useState({});
   const [unitAnchor, setUnitAnchor] = useState(null);
@@ -71,14 +71,14 @@ export default function ProductFormDialog({
       setName(initialProduct.name ?? "");
       setCategory(initialProduct.category ?? "");
       setQuantity(initialProduct.quantity ?? 1);
-      setUnit(initialProduct.unit ?? "Pck");
+      setUnit(initialProduct.unit ?? "Упак.");
       setExpiryDate(dayjs(initialProduct.expiryDate));
       setErrors({});
     } else {
       setName("");
       setCategory("");
       setQuantity(1);
-      setUnit("Pck");
+      setUnit("Упак.");
       setExpiryDate(dayjs().add(3, "day"));
       setErrors({});
     }

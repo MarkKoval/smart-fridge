@@ -12,13 +12,20 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
-import { useTheme } from "@mui/material/styles";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { alpha, useTheme } from "@mui/material/styles";
 import NavDrawer from "./NavDrawer";
 import { getExpiryStatus } from "../../utils/date";
 
 const DRAWER_WIDTH = 280;
 
-export default function AppLayout({ children, products }) {
+export default function AppLayout({
+  children,
+  products,
+  themeMode,
+  onToggleTheme,
+}) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,7 +46,15 @@ export default function AppLayout({ children, products }) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
-      <AppBar position="fixed" color="default" elevation={0}>
+      <AppBar
+        position="fixed"
+        color="default"
+        elevation={0}
+        sx={{
+          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
+          ml: { md: `${DRAWER_WIDTH}px` },
+        }}
+      >
         <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
           {isMobile && (
             <IconButton
@@ -61,20 +76,28 @@ export default function AppLayout({ children, products }) {
               alignItems: "center",
               gap: 1,
               fontWeight: 700,
+              color: "text.primary",
             }}
           >
             <span style={{ fontSize: 18 }}>🌿</span> Розумний холодильник
           </Typography>
 
-          <Badge
-            badgeContent={expiredCount}
-            color="error"
-            sx={{ mr: 1 }}
-            title="Кількість прострочених"
-          >
-            <ReportProblemIcon />
-          </Badge>
-
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Badge
+              badgeContent={expiredCount}
+              color="error"
+              title="Кількість прострочених"
+            >
+              <ReportProblemIcon />
+            </Badge>
+            <IconButton
+              color="inherit"
+              onClick={onToggleTheme}
+              aria-label="Перемкнути тему"
+            >
+              {themeMode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
 
@@ -93,7 +116,7 @@ export default function AppLayout({ children, products }) {
             sx={{
               "& .MuiDrawer-paper": {
                 width: DRAWER_WIDTH,
-                backgroundColor: "rgba(255,255,255,0.92)",
+                backgroundColor: alpha(theme.palette.background.paper, 0.92),
                 backdropFilter: "blur(20px)",
               },
             }}
@@ -108,7 +131,7 @@ export default function AppLayout({ children, products }) {
               "& .MuiDrawer-paper": {
                 width: DRAWER_WIDTH,
                 boxSizing: "border-box",
-                backgroundColor: "rgba(255,255,255,0.92)",
+                backgroundColor: alpha(theme.palette.background.paper, 0.92),
                 backdropFilter: "blur(20px)",
               },
             }}

@@ -64,6 +64,11 @@ export function buildTheme(mode) {
             background: theme.palette.background.default,
             color: theme.palette.text.primary,
             WebkitFontSmoothing: "antialiased",
+            transition: "background-color 200ms ease, color 200ms ease",
+          },
+          "*, *::before, *::after": {
+            transition:
+              "background-color 200ms ease, color 200ms ease, border-color 200ms ease",
           },
           "*::selection": {
             background: alpha(theme.palette.primary.main, 0.22),

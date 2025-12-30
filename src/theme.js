@@ -11,12 +11,23 @@ const IOS = {
   text: { primary: "#1C1C1E", secondary: "#636366", disabled: "#8E8E93" },
 };
 
+const IOS_DARK = {
+  primary: { main: "#32D74B", light: "#4CD964", dark: "#1E8E39" },
+  secondary: { main: "#0A84FF", light: "#5AC8FA", dark: "#0060DF" },
+  success: { main: "#32D74B" },
+  warning: { main: "#FFD60A" },
+  error: { main: "#FF453A" },
+  background: { default: "#0B0B0F", paper: "#1C1C1E" },
+  divider: "#2C2C2E",
+  text: { primary: "#F2F2F7", secondary: "#B0B0B5", disabled: "#8E8E93" },
+};
+
 export function buildTheme(mode) {
-  const p = IOS;
+  const p = mode === "dark" ? IOS_DARK : IOS;
 
   return createTheme({
     palette: {
-      mode: "light",
+      mode,
       primary: p.primary,
       secondary: p.secondary,
       success: p.success,

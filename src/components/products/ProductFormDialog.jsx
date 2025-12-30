@@ -213,7 +213,6 @@ export default function ProductFormDialog({
                     Категорія
                   </Typography>
                   <FormControl fullWidth error={Boolean(errors.category)}>
-                    <InputLabel shrink>Категорія</InputLabel>
                     <Select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}

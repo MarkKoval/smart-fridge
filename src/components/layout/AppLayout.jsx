@@ -123,12 +123,14 @@ export default function AppLayout({ children, products }) {
         component="main"
         sx={{
           flexGrow: 1,
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
-          px: { xs: 2, sm: 3 },
+          width: "100%",
+          px: { xs: 2.5, sm: 3.5, md: 4 },
           pb: { xs: 3, sm: 4 },
           pt: { xs: 10, sm: 11 },
           maxWidth: 1180,
-          mx: "auto",
+          mx: { xs: 0, md: 0 },
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {children}

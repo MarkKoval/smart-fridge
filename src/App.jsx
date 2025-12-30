@@ -13,6 +13,8 @@ import { useSnackbar } from "./hooks/useSnackbar";
 
 import { CATEGORIES, buildMockProducts } from "./data/mockProducts";
 
+const STORAGE_KEY_THEME = "smart-fridge-theme";
+
 // ✅ API
 import {
   getProducts,
@@ -136,3 +138,4 @@ export default function App() {
     </ThemeProvider>
   );
 }
+  const onToggleMode = () => setMode((m) => (m === "dark" ? "light" : "dark"));

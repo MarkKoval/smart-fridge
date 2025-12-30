@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { useTheme } from "@mui/material/styles";
 
 export default function ProductFilters({
   categories,
@@ -23,6 +24,7 @@ export default function ProductFilters({
   setShowExpiredOnly,
   onAdd,
 }) {
+  const theme = useTheme();
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}

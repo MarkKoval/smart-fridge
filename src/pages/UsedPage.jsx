@@ -59,7 +59,7 @@ export default function UsedPage({
 
   return (
     <Box>
-      <Typography variant="h5" fontWeight={800} sx={{ mb: 1 }}>
+      <Typography variant="h5" fontWeight={800} sx={{ mb: 1, pl: 0.5, position: "relative", zIndex: 1 }}>
         Використані
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>

@@ -4,8 +4,14 @@ import {
   Badge,
   Box,
   CssBaseline,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Drawer,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Toolbar,
   Typography,
   useMediaQuery,
@@ -29,11 +35,18 @@ export default function AppLayout({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [expiredOpen, setExpiredOpen] = useState(false);
 
   const expiredCount = useMemo(() => {
     return products
       .filter((p) => !p.isUsed)
       .filter((p) => getExpiryStatus(p.expiryDate).key === "expired").length;
+  }, [products]);
+
+  const expiredProducts = useMemo(() => {
+    return products
+      .filter((p) => !p.isUsed)
+      .filter((p) => getExpiryStatus(p.expiryDate).key === "expired");
   }, [products]);
 
   const handleDrawerToggle = () => setMobileOpen((v) => !v);
@@ -88,7 +101,13 @@ export default function AppLayout({
               color="error"
               title="Кількість прострочених"
             >
-              <ReportProblemIcon />
+              <IconButton
+                color="inherit"
+                aria-label="Переглянути прострочені продукти"
+                onClick={() => setExpiredOpen(true)}
+              >
+                <ReportProblemIcon />
+              </IconButton>
             </Badge>
             <IconButton
               color="inherit"
@@ -100,6 +119,33 @@ export default function AppLayout({
           </Box>
         </Toolbar>
       </AppBar>
+
+      <Dialog
+        open={expiredOpen}
+        onClose={() => setExpiredOpen(false)}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle>Прострочені продукти</DialogTitle>
+        <DialogContent>
+          {expiredProducts.length === 0 ? (
+            <Typography variant="body2" color="text.secondary">
+              Немає прострочених продуктів.
+            </Typography>
+          ) : (
+            <List dense>
+              {expiredProducts.map((product) => (
+                <ListItem key={product.id} divider>
+                  <ListItemText
+                    primary={product.name}
+                    secondary={`${product.category} • ${product.quantity}${product.unit ? ` ${product.unit}` : ""}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Drawer */}
       <Box

@@ -94,7 +94,7 @@ export default function ProductFormDialog({
   );
   const isUnitMenuOpen = Boolean(unitAnchor);
   const sliderMax = Number(quantityMax) || 1;
-  const sliderStep = Number.isInteger(sliderMax) ? 1 : 0.1;
+  const sliderStep = 10;
   const sliderMin = sliderMax < 1 ? Math.max(sliderStep, sliderMax / 10) : 1;
 
   const handleSave = () => {

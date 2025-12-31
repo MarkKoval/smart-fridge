@@ -8,7 +8,6 @@ import {
   Paper,
   Select,
   Stack,
-  Switch,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -19,8 +18,6 @@ export default function ProductFilters({
   setCategory,
   sort,
   setSort,
-  showExpiredOnly,
-  setShowExpiredOnly,
   onAdd,
 }) {
   return (
@@ -71,11 +68,9 @@ export default function ProductFilters({
           </FormControl>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, pl: 0.5 }}>
-            <Switch
-              checked={showExpiredOnly}
-              onChange={(e) => setShowExpiredOnly(e.target.checked)}
-            />
-            <Typography variant="body2">Лише прострочені</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Фільтри застосовуються до активних продуктів.
+            </Typography>
           </Box>
         </Stack>
       </Paper>

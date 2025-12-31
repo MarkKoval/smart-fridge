@@ -22,11 +22,35 @@ import {
   toggleUsed,
 } from "./api/productsApi";
 
+const getPreferredTheme = () => {
+  if (typeof window === "undefined" || !window.matchMedia) return "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
 export default function App() {
-  const [themeMode, setThemeMode] = useState("light");
+  const [themeMode, setThemeMode] = useState(getPreferredTheme);
   const theme = useMemo(() => buildTheme(themeMode), [themeMode]);
   const toggleTheme = useCallback(() => {
     setThemeMode((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return undefined;
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (event) => {
+      setThemeMode(event.matches ? "dark" : "light");
+    };
+
+    setThemeMode(mediaQuery.matches ? "dark" : "light");
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
   }, []);
 
   // products (тепер не reducer)

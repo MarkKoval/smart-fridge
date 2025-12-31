@@ -37,7 +37,20 @@ export default function ProductCards({
         const dLeft = daysUntil(p.expiryDate);
         const unitLabel = p.unit ? ` ${p.unit}` : "";
         return (
-          <Card key={p.id} variant="outlined">
+          <Card
+            key={p.id}
+            variant="outlined"
+            onClick={() => onEdit(p)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onEdit(p);
+              }
+            }}
+            sx={{ cursor: "pointer" }}
+          >
             <CardContent>
               <Stack direction="row" alignItems="center" justifyContent="space-between" gap={2}>
                 <Typography variant="subtitle1" fontWeight={700}>
@@ -70,19 +83,34 @@ export default function ProductCards({
 
             <CardActions sx={{ justifyContent: "flex-end" }}>
               <Tooltip title="Редагувати">
-                <IconButton onClick={() => onEdit(p)}>
+                <IconButton
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onEdit(p);
+                  }}
+                >
                   <EditIcon />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title="Видалити">
-                <IconButton onClick={() => onDelete(p)}>
+                <IconButton
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onDelete(p);
+                  }}
+                >
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title={isUsedView ? "Повернути в активні" : "Позначити використаним"}>
-                <IconButton onClick={() => onToggleUsed(p)}>
+                <IconButton
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onToggleUsed(p);
+                  }}
+                >
                   {isUsedView ? <UndoIcon /> : <CheckIcon />}
                 </IconButton>
               </Tooltip>

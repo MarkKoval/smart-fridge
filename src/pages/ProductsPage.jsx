@@ -6,7 +6,7 @@ import ProductTable from "../components/products/ProductTable";
 import ProductCards from "../components/products/ProductCards";
 import ProductFormDialog from "../components/products/ProductFormDialog";
 import ConfirmDialog from "../components/common/ConfirmDialog";
-import { compareByExpiryAsc, compareByExpiryDesc, getExpiryStatus } from "../utils/date";
+import { compareByExpiryAsc, compareByExpiryDesc } from "../utils/date";
 
 export default function ProductsPage({
   products,
@@ -23,7 +23,6 @@ export default function ProductsPage({
 
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("expiryAsc");
-  const [showExpiredOnly, setShowExpiredOnly] = useState(false);
 
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState(null);
@@ -35,15 +34,13 @@ export default function ProductsPage({
     let list = products.filter((p) => !p.isUsed);
 
     if (category !== "all") list = list.filter((p) => p.category === category);
-    if (showExpiredOnly) list = list.filter((p) => getExpiryStatus(p.expiryDate).key === "expired");
-
     const sorted = [...list];
     if (sort === "expiryAsc") sorted.sort(compareByExpiryAsc);
     if (sort === "expiryDesc") sorted.sort(compareByExpiryDesc);
     if (sort === "addedDesc") sorted.sort((a, b) => (b.dateAdded || "").localeCompare(a.dateAdded || ""));
     if (sort === "addedAsc") sorted.sort((a, b) => (a.dateAdded || "").localeCompare(b.dateAdded || ""));
     return sorted;
-  }, [products, category, sort, showExpiredOnly]);
+  }, [products, category, sort]);
 
   const openAdd = () => {
     setEditing(null);
@@ -93,8 +90,6 @@ export default function ProductsPage({
         setCategory={setCategory}
         sort={sort}
         setSort={setSort}
-        showExpiredOnly={showExpiredOnly}
-        setShowExpiredOnly={setShowExpiredOnly}
         onAdd={openAdd}
       />
 

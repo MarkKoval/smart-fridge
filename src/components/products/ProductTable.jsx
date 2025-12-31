@@ -53,7 +53,12 @@ export default function ProductTable({
             const dLeft = daysUntil(p.expiryDate);
             const unitLabel = p.unit ? ` ${p.unit}` : "";
             return (
-              <TableRow key={p.id} hover>
+              <TableRow
+                key={p.id}
+                hover
+                onClick={() => onEdit(p)}
+                sx={{ cursor: "pointer" }}
+              >
                 <TableCell>
                   <Typography variant="body2" fontWeight={600}>
                     {p.name}
@@ -73,19 +78,37 @@ export default function ProductTable({
                 </TableCell>
                 <TableCell align="right">
                   <Tooltip title="Редагувати">
-                    <IconButton size="small" onClick={() => onEdit(p)}>
+                    <IconButton
+                      size="small"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        onEdit(p);
+                      }}
+                    >
                       <EditIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
 
                   <Tooltip title="Видалити">
-                    <IconButton size="small" onClick={() => onDelete(p)}>
+                    <IconButton
+                      size="small"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        onDelete(p);
+                      }}
+                    >
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
 
                   <Tooltip title={isUsedView ? "Повернути в активні" : "Позначити використаним"}>
-                    <IconButton size="small" onClick={() => onToggleUsed(p)}>
+                    <IconButton
+                      size="small"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        onToggleUsed(p);
+                      }}
+                    >
                       {isUsedView ? <UndoIcon fontSize="small" /> : <CheckIcon fontSize="small" />}
                     </IconButton>
                   </Tooltip>

@@ -5,11 +5,11 @@ import {
   DialogContent,
   FormControl,
   IconButton,
-  InputLabel,
   Menu,
   MenuItem,
   Paper,
   Select,
+  Slider,
   Stack,
   TextField,
   Typography,
@@ -59,6 +59,7 @@ export default function ProductFormDialog({
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [quantityMax, setQuantityMax] = useState(1);
   const [unit, setUnit] = useState("Упак.");
   const [expiryDate, setExpiryDate] = useState(dayjs().add(3, "day"));
   const [errors, setErrors] = useState({});
@@ -71,6 +72,7 @@ export default function ProductFormDialog({
       setName(initialProduct.name ?? "");
       setCategory(initialProduct.category ?? "");
       setQuantity(initialProduct.quantity ?? 1);
+      setQuantityMax(initialProduct.quantityMax ?? initialProduct.quantity ?? 1);
       setUnit(initialProduct.unit ?? "Упак.");
       setExpiryDate(dayjs(initialProduct.expiryDate));
       setErrors({});
@@ -78,6 +80,7 @@ export default function ProductFormDialog({
       setName("");
       setCategory("");
       setQuantity(1);
+      setQuantityMax(1);
       setUnit("Упак.");
       setExpiryDate(dayjs().add(3, "day"));
       setErrors({});
@@ -90,6 +93,9 @@ export default function ProductFormDialog({
     [unit],
   );
   const isUnitMenuOpen = Boolean(unitAnchor);
+  const sliderMax = Number(quantityMax) || 1;
+  const sliderStep = 10;
+  const sliderMin = sliderMax < 1 ? Math.max(sliderStep, sliderMax / 10) : 1;
 
   const handleSave = () => {
     const payload = {
@@ -98,6 +104,7 @@ export default function ProductFormDialog({
       quantity: Number(quantity),
       unit,
       expiryDate: dayjs(expiryDate).toISOString(),
+      quantityMax: isEdit ? sliderMax : Number(quantity),
     };
 
     const v = validate(payload);
@@ -254,24 +261,50 @@ export default function ProductFormDialog({
                     >
                       {unit}
                     </Button>
-                    <TextField
-                      type="number"
-                      inputProps={{ min: 1, step: 1, inputMode: "decimal" }}
-                      value={quantity}
-                      onChange={(e) => setQuantity(e.target.value)}
-                      error={Boolean(errors.quantity)}
-                      helperText={errors.quantity}
-                      placeholder="0"
-                      size="small"
-                      sx={{ flex: 1 }}
-                      InputProps={{
-                        sx: {
-                          borderRadius: 2,
-                          backgroundColor: "background.paper",
-                        },
-                      }}
-                    />
+                    {!isEdit && (
+                      <TextField
+                        type="number"
+                        inputProps={{ min: 1, step: 1, inputMode: "decimal" }}
+                        value={quantity}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setQuantity(value === "" ? "" : Number(value));
+                        }}
+                        error={Boolean(errors.quantity)}
+                        helperText={errors.quantity}
+                        placeholder="0"
+                        size="small"
+                        sx={{ flex: 1 }}
+                        InputProps={{
+                          sx: {
+                            borderRadius: 2,
+                            backgroundColor: "background.paper",
+                          },
+                        }}
+                      />
+                    )}
                   </Stack>
+                  {isEdit && (
+                    <Stack spacing={1}>
+                      <Slider
+                        min={sliderMin}
+                        max={sliderMax}
+                        step={sliderStep}
+                        value={Number(quantity) || sliderMin}
+                        valueLabelDisplay="auto"
+                        onChange={(event, value) => setQuantity(value)}
+                        sx={{ mt: 0.5 }}
+                      />
+                      <Typography variant="caption" color="text.secondary">
+                        Поточна кількість: {quantity} / {sliderMax}
+                      </Typography>
+                      {errors.quantity && (
+                        <Typography variant="caption" color="error">
+                          {errors.quantity}
+                        </Typography>
+                      )}
+                    </Stack>
+                  )}
                   {errors.unit && (
                     <Typography variant="caption" color="error">
                       {errors.unit}
